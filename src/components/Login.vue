@@ -87,9 +87,12 @@ export default {
             password: this.form.password
           }
         }).then(res => {
-          if (res.data.meta.msg === '登录成功') {
+          if (res.data.meta.status === 200) {
+            // 存储 token 到本地 用作守卫拦截
+            localStorage.setItem('token', res.data.data.token)
+            console.log(res.data)
             // 登录成功要跳转到首页
-            this.$router.push('index')
+            this.$router.push('/index')
             this.$message({
               message: '登录成功',
               type: 'success'
