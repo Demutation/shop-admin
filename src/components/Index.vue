@@ -9,9 +9,10 @@
       </div>
       <div class="logout">
         欢迎光临~
-        <a href="javascript:;">退出</a>
+        <a href="javascript:;" @click="quit">退出</a>
       </div>
     </el-header>
+
     <el-container>
       <el-aside width="200px">
         <!-- el-menu整个大盒子 -->
@@ -22,7 +23,7 @@
           text-color="#fff"
           active-text-color="#ffd04b"
           unique-opened
-
+          router
         >
           <!--el-submenu 每个菜单 el-menu-item每个子菜单-->
           <el-submenu index="1">
@@ -30,25 +31,47 @@
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">用户列表</el-menu-item>
+            <el-menu-item index="users">用户列表</el-menu-item>
           </el-submenu>
-           <el-submenu index="1">
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>权限管理</span>
             </template>
-            <el-menu-item index="1-1">角色列表</el-menu-item>
-            <el-menu-item index="1-2">权限列表</el-menu-item>
+            <el-menu-item index="2-1">角色列表</el-menu-item>
+            <el-menu-item index="2-2">权限列表</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    quit () {
+      // 清除token
+      // localStorage.removeItem('token')
+      // this.$router.push('login')
+      this.$confirm('请确认要退出吗？', '温馨提示', {
+        confirmButtonText: '确定',
+        concelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '退出成功！'
+        })
+        localStorage.removeItem('token')
+        this.$router.push('login')
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -86,6 +109,9 @@ export default {}
 }
 .el-aside {
   background-color: #545c64;
+  .el-menu {
+    border-right: none;
+  }
 }
 .el-main {
   background-color: #ecf0f1;

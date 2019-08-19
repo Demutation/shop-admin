@@ -5,9 +5,9 @@
       <el-form-item label="用户名" prop="username">
         <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
       </el-form-item>
-      <el-form-item label="密  码" prop="password">
+      <el-form-item label="密  码" prop="password" >
         <!-- 隐藏密码 type="password" -->
-        <el-input v-model="form.password" type="password" placeholder="请输入密码"></el-input>
+        <el-input v-model="form.password" type="password" placeholder="请输入密码" ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">登录</el-button>
@@ -93,9 +93,11 @@ export default {
             console.log(res.data)
             // 登录成功要跳转到首页
             this.$router.push('/index')
+            // 消息提示
             this.$message({
               message: '登录成功',
-              type: 'success'
+              type: 'success',
+              duration: 1000
             })
           } else {
             this.$message.error(res.data.meta.msg)
