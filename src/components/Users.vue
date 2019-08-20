@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -122,14 +121,13 @@ export default {
   methods: {
     getData () {
       // 注意axios.get 的书写格式 不带token返回的是null，无效的token
-      axios
-        .get('http://localhost:8888/api/private/v1/users', {
+      this.$axios
+        .get('users', {
           params: {
             query: this.query,
             pagenum: this.pagenum,
             pagesize: this.pagesize
-          },
-          headers: { Authorization: localStorage.getItem('token') }
+          }
         })
         .then(res => {
           this.tableData = res.data.data.users
@@ -139,12 +137,9 @@ export default {
     },
     changState (row) {
       // 发送axios请求
-      axios
+      this.$axios
         .put(
-          `http://localhost:8888/api/private/v1/users/${row.id}/state/${row.mg_state}`,
-          {
-            headers: { Authorization: localStorage.getItem('token') }
-          }
+          `users/${row.id}/state/${row.mg_state}`
         )
         .then(res => {
           console.log(res.data)
@@ -176,9 +171,7 @@ export default {
         type: 'warning'
       }).then(() => {
         // 发送axios请求
-        axios.delete(`http://localhost:8888/api/private/v1/users/${id}`, {
-          headers: { Authorization: localStorage.getItem('token') }
-        }).then(res => {
+        this.$axios.delete(`users/${id}`).then(res => {
           console.log('成功')
           const { meta } = res.data // 对象解构赋值
           if (meta.status === 200) {
@@ -205,15 +198,13 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 发送axios
-          axios.post('http://localhost:8888/api/private/v1/users', {
+          this.$axios.post('users', {
             data: {
-              username: this.username,
-              password: this.password,
-              email: this.email,
-              mobile: this.mobile
-            },
-            headers: { Authorization: localStorage.getItem('token') }
-
+              username: this.form.username,
+              password: this.form.password,
+              email: this.form.email,
+              mobile: this.form.mobile
+            }
           }).then(res => {
             console.log(res.data)
           })

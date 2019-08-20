@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 // axios 在哪使用就在哪引入
 export default {
   data () {
@@ -79,9 +78,9 @@ export default {
         if (!valid) {
           return
         } // 错误直接return
-        axios({
+        this.$axios({
           method: 'post',
-          url: 'http://localhost:8888/api/private/v1/login',
+          url: 'login',
           data: {
             username: this.form.username,
             password: this.form.password
