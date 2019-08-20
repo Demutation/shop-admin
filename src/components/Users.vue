@@ -198,18 +198,22 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 发送axios
-          this.$axios.post('users', {
-            data: {
-              username: this.form.username,
-              password: this.form.password,
-              email: this.form.email,
-              mobile: this.form.mobile
-            }
-          }).then(res => {
-            console.log(res.data)
+          this.$axios.post('users', this.form
+          // {
+          //   username: this.form.username,
+          //   password: this.form.password,
+          //   email: this.form.email,
+          //   mobile: this.form.monile
+          // }
+          ).then(res => {
+            // console.log(res.data)
+            // 提示添加成功 关闭对话框 重新渲染
+            this.$message.success('添加成功')
+            this.dialogVisible = false
+            this.getData()
           })
         } else {
-          console.log(2)
+          // console.log(2)
         }
       })
     }
