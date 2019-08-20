@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" @keyup.enter="submitForm">
     <el-form ref="form" :rules="rules" :model="form" label-width="80px" status-icon>
       <img class="logo" src="../assets/avatar.jpg" alt />
       <el-form-item label="用户名" prop="username">
