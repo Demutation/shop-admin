@@ -15,5 +15,11 @@ body,
 #app {
   width: 100%;
   height: 100%;
+  .breadcrumb {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
 }
 </style>

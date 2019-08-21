@@ -320,12 +320,6 @@ export default {
 </script>
 
 <style lang="scss">
-.users .breadcrumb {
-  height: 40px;
-  line-height: 40px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
-}
 .users .input-with-select {
   width: 320px;
   margin-bottom: 10px;
